@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- PWA Meta Tags -->
+<meta name="application-name" content="BookHub">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="BookHub">
+<meta name="description" content="Your digital library app">
+<meta name="format-detection" content="telephone=no">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="msapplication-TileColor" content="#3498db">
+<meta name="msapplication-tap-highlight" content="no">
+<meta name="theme-color" content="#3498db">
+
+<!-- Apple Touch Icons -->
+<link rel="apple-touch-icon" href="/icons/icon-152x152.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/icons/icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/icons/icon-180x180.png">
+<link rel="apple-touch-icon" sizes="167x167" href="/icons/icon-167x167.png">
+
+<!-- PWA Manifest -->
+<link rel="manifest" href="/manifest.json">
+
+<!-- Theme Color for Mobile Browsers -->
+<meta name="theme-color" content="#3498db">
+<meta name="msapplication-navbutton-color" content="#3498db">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Public Library - BookHub</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation Header -->
+    <header style="background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); padding: 20px 0; margin-bottom: 30px;">
+        <div class="container">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <a href="index.html" style="text-decoration: none; display: flex; align-items: center; gap: 10px;">
+                        <div style="font-size: 1.5em;">🏠</div>
+                        <span style="color: #2c3e50; font-weight: bold;">Home</span>
+                    </a>
+                </div>
+                <h1 style="margin: 0; color: #2c3e50; text-align: center; flex: 1;">🏛️ Public Library</h1>
+                <div style="display: flex; gap: 15px;">
+                    <a href="community.html" class="action-btn secondary" style="padding: 8px 16px; text-decoration: none;">
+                        👥 Community
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Rest of your existing library code goes here -->
+        <!-- Copy the entire content from your existing index.html (the library page) -->
+        <!-- Make sure to update any API paths if needed -->
+        
+        <header>
+            <h1>📚 Public Domain Library</h1>
+            <p class="subtitle">Free books for everyone! • Legal downloads</p>
+        </header>
+
+        <!-- Statistics -->
+        <div class="stats-section" id="statsSection">
+            <div class="stat-card">
+                <h3>Total Books</h3>
+                <p id="totalBooks">0</p>
+            </div>
+            <div class="stat-card">
+                <h3>Public Domain</h3>
+                <p id="publicDomainBooks">0</p>
+            </div>
+            <div class="stat-card">
+                <h3>Total Downloads</h3>
+                <p id="totalDownloads">0</p>
+            </div>
+        </div>
+
+        <!-- Legal Disclaimer -->
+        <div class="legal-disclaimer">
+            <h3>⚠️ Legal Disclaimer</h3>
+            <p>This digital library contains only public domain works. All books are out of copyright and free to download. No copyrighted material is distributed.</p>
+        </div>
+
+        <!-- Add Book Form -->
+        <div class="add-book-form">
+            <h2>Add New Book</h2>
+            <form id="bookForm">
+                <input type="text" id="title" placeholder="Book Title" required>
+                <input type="text" id="author" placeholder="Author" required>
+                <input type="text" id="genre" placeholder="Genre">
+                <input type="number" id="year" placeholder="Publication Year">
+                <div class="form-options">
+                    <label>
+                        <input type="checkbox" id="is_read"> I've read this book
+                    </label>
+                    <label>
+                        <input type="checkbox" id="is_public_domain"> Public Domain (pre-1928)
+                    </label>
+                </div>
+                <button type="submit">Add Book</button>
+            </form>
+        </div>
+
+        <!-- Search and Filters -->
+        <div class="controls-section">
+            <input type="text" id="searchInput" placeholder="Search books...">
+            <div class="filter-buttons">
+                <button id="showAll" class="filter-btn active">All Books</button>
+                <button id="showPublicDomain" class="filter-btn">Public Domain Only</button>
+            </div>
+        </div>
+
+        <!-- Books List -->
+        <div class="books-grid" id="booksContainer">
+            <!-- Books will be displayed here -->
+        </div>
+    </div>
+
+    <!-- Use your existing library JavaScript -->
+    <script src="script.js"></script>
+    <script src="/pwa.js"></script>
+    <script src="/mobile-gestures.js"></script>
+<!-- Mobile Bottom Navigation -->
+<nav class="mobile-nav">
+    <a href="index.html" class="nav-item">
+        <span class="nav-icon">🏠</span>
+        <span>Home</span>
+    </a>
+    <a href="library.html" class="nav-item">
+        <span class="nav-icon">🏛️</span>
+        <span>Library</span>
+    </a>
+    <a href="community.html" class="nav-item">
+        <span class="nav-icon">👥</span>
+        <span>Community</span>
+    </a>
+    <a href="my-library.html" class="nav-item">
+        <span class="nav-icon">📚</span>
+        <span>My Books</span>
+    </a>
+    <a href="categories.html" class="nav-item">
+        <span class="nav-icon">📂</span>
+        <span>Categories</span>
+    </a>
+</nav>
+
+<!-- Install App Button (shown conditionally) -->
+<button id="installButton" style="display: none; position: fixed; bottom: 80px; right: 20px; background: #3498db; color: white; border: none; border-radius: 50%; width: 60px; height: 60px; font-size: 1.5em; box-shadow: 0 4px 12px rgba(0,0,0,0.3); z-index: 999;">
+    📱
+</button>
+</body>
+</html>

@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- PWA Meta Tags -->
+<meta name="application-name" content="BookHub">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="BookHub">
+<meta name="description" content="Your digital library app">
+<meta name="format-detection" content="telephone=no">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="msapplication-TileColor" content="#3498db">
+<meta name="msapplication-tap-highlight" content="no">
+<meta name="theme-color" content="#3498db">
+
+<!-- Apple Touch Icons -->
+<link rel="apple-touch-icon" href="/icons/icon-152x152.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/icons/icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/icons/icon-180x180.png">
+<link rel="apple-touch-icon" sizes="167x167" href="/icons/icon-167x167.png">
+
+<!-- PWA Manifest -->
+<link rel="manifest" href="/manifest.json">
+
+<!-- Theme Color for Mobile Browsers -->
+<meta name="theme-color" content="#3498db">
+<meta name="msapplication-navbutton-color" content="#3498db">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books by Category - BookHub</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .categories-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .category-card {
+            background: white;
+            padding: 30px 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 3px solid transparent;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .category-icon {
+            font-size: 3.5em;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .category-title {
+            font-size: 1.4em;
+            margin-bottom: 10px;
+            color: #2c3e50;
+            font-weight: 600;
+        }
+
+        .category-count {
+            background: #ecf0f1;
+            color: #7f8c8d;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        .books-section {
+            margin-top: 40px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .view-all {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .category-breadcrumb {
+            background: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .breadcrumb-item {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        .breadcrumb-separator {
+            color: #7f8c8d;
+        }
+
+        .category-description {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border-left: 4px solid #3498db;
+        }
+
+        .popular-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .tag {
+            background: #e3f2fd;
+            color: #1976d2;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.9em;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .tag:hover {
+            background: #bbdefb;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Header -->
+    <header style="background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); padding: 20px 0; margin-bottom: 30px;">
+        <div class="container">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <a href="index.html" style="text-decoration: none; display: flex; align-items: center; gap: 10px;">
+                        <div style="font-size: 1.5em;">🏠</div>
+                        <span style="color: #2c3e50; font-weight: bold;">Home</span>
+                    </a>
+                </div>
+                <h1 style="margin: 0; color: #2c3e50; text-align: center; flex: 1;">📂 Books by Category</h1>
+                <div style="display: flex; gap: 15px;">
+                    <a href="library.html" class="action-btn secondary" style="padding: 8px 16px; text-decoration: none;">
+                        🏛️ Public Library
+                    </a>
+                    <a href="my-library.html" class="action-btn secondary" style="padding: 8px 16px; text-decoration: none;">
+                        📚 My Library
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Categories Header -->
+        <div class="categories-header">
+            <h1>Explore Books by Category</h1>
+            <p>Discover books organized by genres and topics from our community</p>
+        </div>
+
+        <!-- Search and Filter -->
+        <div class="controls-section">
+            <input type="text" id="categorySearch" placeholder="Search categories...">
+            <div class="filter-buttons">
+                <button class="filter-btn active" onclick="filterCategories('all')">All Categories</button>
+                <button class="filter-btn" onclick="filterCategories('popular')">Most Popular</button>
+                <button class="filter-btn" onclick="filterCategories('recent')">Recently Added</button>
+            </div>
+        </div>
+
+        <!-- Categories Grid -->
+        <div class="categories-grid" id="categoriesContainer">
+            <!-- Categories will be loaded here -->
+        </div>
+
+        <!-- Selected Category View -->
+        <div id="categoryDetailView" style="display: none;">
+            <!-- Breadcrumb -->
+            <div class="category-breadcrumb">
+                <a href="categories.html" class="breadcrumb-item">All Categories</a>
+                <span class="breadcrumb-separator">›</span>
+                <span id="currentCategoryName">Category Name</span>
+            </div>
+
+            <!-- Category Description -->
+            <div class="category-description">
+                <h3 id="categoryDetailTitle">Category Title</h3>
+                <p id="categoryDetailDescription">Category description will appear here...</p>
+                
+                <!-- Popular Tags -->
+                <div class="popular-tags" id="categoryTags">
+                    <!-- Tags will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Books in this Category -->
+            <div class="books-section">
+                <div class="section-header">
+                    <h3>Books in this Category</h3>
+                    <span class="book-count" id="categoryBookCount">0 books</span>
+                </div>
+
+                <div class="books-grid" id="categoryBooksContainer">
+                    <!-- Books will be loaded here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- All Categories View -->
+        <div id="allCategoriesView">
+            <!-- Recently Added Books from Community -->
+            <div class="books-section">
+                <div class="section-header">
+                    <h3>📚 Recently Shared in Community</h3>
+                    <a href="community.html" class="view-all">View All Community Books →</a>
+                </div>
+
+                <div class="books-grid" id="recentCommunityBooks">
+                    <!-- Recent community books will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Popular Genres -->
+            <div class="books-section">
+                <div class="section-header">
+                    <h3>🔥 Popular Genres Right Now</h3>
+                </div>
+
+                <div class="popular-tags" id="popularGenres">
+                    <!-- Popular genres will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="categories.js"></script>
+    <script src="/pwa.js"></script>
+    <script src="/mobile-gestures.js"></script>
+<!-- Mobile Bottom Navigation -->
+<nav class="mobile-nav">
+    <a href="index.html" class="nav-item">
+        <span class="nav-icon">🏠</span>
+        <span>Home</span>
+    </a>
+    <a href="library.html" class="nav-item">
+        <span class="nav-icon">🏛️</span>
+        <span>Library</span>
+    </a>
+    <a href="community.html" class="nav-item">
+        <span class="nav-icon">👥</span>
+        <span>Community</span>
+    </a>
+    <a href="my-library.html" class="nav-item">
+        <span class="nav-icon">📚</span>
+        <span>My Books</span>
+    </a>
+    <a href="categories.html" class="nav-item">
+        <span class="nav-icon">📂</span>
+        <span>Categories</span>
+    </a>
+</nav>
+
+<!-- Install App Button (shown conditionally) -->
+<button id="installButton" style="display: none; position: fixed; bottom: 80px; right: 20px; background: #3498db; color: white; border: none; border-radius: 50%; width: 60px; height: 60px; font-size: 1.5em; box-shadow: 0 4px 12px rgba(0,0,0,0.3); z-index: 999;">
+    📱
+</button>
+</body>
+</html>

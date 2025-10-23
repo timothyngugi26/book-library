@@ -1,0 +1,13 @@
+{
+  "name": "bookhub-app",
+  "version": "1.0.0",
+  "description": "BookHub - Digital Library PWA",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "build-pwa": "node build-pwa.js"
+  },
+  "keywords": ["pwa", "books", "library", "digital-books"],
+  "author": "Your Name",
+  "license": "MIT"
+}

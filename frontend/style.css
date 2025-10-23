@@ -1,0 +1,110 @@
+/* Mobile-First Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: 15px;
+  }
+  
+  header h1 {
+    font-size: 1.5em;
+  }
+  
+  .books-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .feature-card {
+    padding: 20px 15px;
+  }
+  
+  .feature-icon {
+    font-size: 3em;
+  }
+  
+  .book-actions {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .book-actions button {
+    width: 100%;
+    text-align: center;
+  }
+  
+  /* Mobile navigation */
+  .mobile-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    border-top: 1px solid #e0e0e0;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    z-index: 1000;
+  }
+  
+  .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: #7f8c8d;
+    font-size: 0.8em;
+    flex: 1;
+  }
+  
+  .nav-item.active {
+    color: #3498db;
+  }
+  
+  .nav-icon {
+    font-size: 1.5em;
+    margin-bottom: 4px;
+  }
+  
+  /* Hide desktop navigation on mobile */
+  .desktop-nav {
+    display: none;
+  }
+}
+
+/* Tablet Styles */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .books-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .mobile-nav {
+    display: none;
+  }
+}
+
+/* Desktop Styles */
+@media (min-width: 1025px) {
+  .mobile-nav {
+    display: none;
+  }
+}
+
+/* PWA Specific Styles */
+.standalone .mobile-nav {
+  padding-bottom: max(10px, env(safe-area-inset-bottom));
+}
+
+/* Touch-friendly buttons */
+button, .action-btn {
+  min-height: 44px;
+  min-width: 44px;
+  padding: 12px 16px;
+}
+
+/* Smooth transitions for mobile */
+.book-card, .feature-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.book-card:active, .feature-card:active {
+  transform: scale(0.98);
+}

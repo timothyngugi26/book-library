@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- PWA Meta Tags -->
+<meta name="application-name" content="BookHub">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="BookHub">
+<meta name="description" content="Your digital library app">
+<meta name="format-detection" content="telephone=no">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="msapplication-TileColor" content="#3498db">
+<meta name="msapplication-tap-highlight" content="no">
+<meta name="theme-color" content="#3498db">
+
+<!-- Apple Touch Icons -->
+<link rel="apple-touch-icon" href="/icons/icon-152x152.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/icons/icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/icons/icon-180x180.png">
+<link rel="apple-touch-icon" sizes="167x167" href="/icons/icon-167x167.png">
+
+<!-- PWA Manifest -->
+<link rel="manifest" href="/manifest.json">
+
+<!-- Theme Color for Mobile Browsers -->
+<meta name="theme-color" content="#3498db">
+<meta name="msapplication-navbutton-color" content="#3498db">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Library - BookHub</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .library-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .library-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .stat-label {
+            color: #7f8c8d;
+            margin-top: 5px;
+        }
+
+        .library-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .library-tab {
+            padding: 12px 24px;
+            background: white;
+            border: 2px solid #3498db;
+            color: #3498db;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .library-tab.active {
+            background: #3498db;
+            color: white;
+        }
+
+        .reading-progress {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: #ecf0f1;
+            border-radius: 5px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #27ae60, #2ecc71);
+            border-radius: 5px;
+            transition: width 0.3s ease;
+        }
+
+        .recently-added {
+            margin-bottom: 30px;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #7f8c8d;
+        }
+
+        .empty-state-icon {
+            font-size: 4em;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+
+        .book-grid-header {
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .sort-options {
+            display: flex;
+            gap: 10px;
+        }
+
+        .sort-btn {
+            padding: 8px 16px;
+            border: 1px solid #ddd;
+            background: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .sort-btn.active {
+            background: #3498db;
+            color: white;
+            border-color: #3498db;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Header -->
+    <header style="background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); padding: 20px 0; margin-bottom: 30px;">
+        <div class="container">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <a href="index.html" style="text-decoration: none; display: flex; align-items: center; gap: 10px;">
+                        <div style="font-size: 1.5em;">🏠</div>
+                        <span style="color: #2c3e50; font-weight: bold;">Home</span>
+                    </a>
+                </div>
+                <h1 style="margin: 0; color: #2c3e50; text-align: center; flex: 1;">📚 My Personal Library</h1>
+                <div style="display: flex; gap: 15px;">
+                    <a href="library.html" class="action-btn secondary" style="padding: 8px 16px; text-decoration: none;">
+                        🏛️ Public Library
+                    </a>
+                    <a href="community.html" class="action-btn secondary" style="padding: 8px 16px; text-decoration: none;">
+                        👥 Community
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Library Header -->
+        <div class="library-header">
+            <h1>Welcome to Your Personal Library</h1>
+            <p>Track your reading journey, organize your books, and discover new favorites</p>
+        </div>
+
+        <!-- Library Statistics -->
+        <div class="library-stats">
+            <div class="stat-card">
+                <div class="stat-number" id="totalMyBooks">0</div>
+                <div class="stat-label">Total Books</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="booksRead">0</div>
+                <div class="stat-label">Books Read</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="readingGoal">0%</div>
+                <div class="stat-label">Reading Goal</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="sharedBooks">0</div>
+                <div class="stat-label">Books Shared</div>
+            </div>
+        </div>
+
+        <!-- Reading Progress -->
+        <div class="reading-progress">
+            <h3>📊 Your Reading Progress</h3>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                <span>Books Read: <strong id="readCount">0</strong></span>
+                <span>Goal: <strong id="readingGoalCount">12</strong> books this year</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+            </div>
+            <div style="text-align: center; margin-top: 10px;">
+                <small>Keep going! You're doing great! 🎉</small>
+            </div>
+        </div>
+
+        <!-- Library Tabs -->
+        <div class="library-tabs">
+            <button class="library-tab active" onclick="showLibraryTab('all')">All Books</button>
+            <button class="library-tab" onclick="showLibraryTab('reading')">Currently Reading</button>
+            <button class="library-tab" onclick="showLibraryTab('read')">Finished Reading</button>
+            <button class="library-tab" onclick="showLibraryTab('want-to-read')">Want to Read</button>
+            <button class="library-tab" onclick="showLibraryTab('shared')">Shared Books</button>
+            <button class="library-tab" onclick="showLibraryTab('favorites')">Favorites</button>
+        </div>
+
+        <!-- Book Grid Header -->
+        <div class="book-grid-header">
+            <h3 id="libraryTabTitle">All My Books</h3>
+            <div class="sort-options">
+                <button class="sort-btn active" onclick="sortBooks('date-added')">Date Added</button>
+                <button class="sort-btn" onclick="sortBooks('title')">Title</button>
+                <button class="sort-btn" onclick="sortBooks('author')">Author</button>
+                <button class="sort-btn" onclick="sortBooks('rating')">Rating</button>
+            </div>
+        </div>
+
+        <!-- Books Grid -->
+        <div class="books-grid" id="myBooksContainer">
+            <!-- Books will be loaded here -->
+        </div>
+
+        <!-- Empty State -->
+        <div id="emptyState" class="empty-state" style="display: none;">
+            <div class="empty-state-icon">📚</div>
+            <h3>Your library is empty</h3>
+            <p>Start building your personal collection by adding books from the public library or community!</p>
+            <div style="margin-top: 20px;">
+                <a href="library.html" class="action-btn" style="text-decoration: none; display: inline-block; margin: 5px;">
+                    Explore Public Library
+                </a>
+                <a href="community.html" class="action-btn secondary" style="text-decoration: none; display: inline-block; margin: 5px;">
+                    Browse Community
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script src="my-library.js"></script>
+    <script src="/pwa.js"></script>
+    <script src="/mobile-gestures.js"></script>
+<!-- Mobile Bottom Navigation -->
+<nav class="mobile-nav">
+    <a href="index.html" class="nav-item">
+        <span class="nav-icon">🏠</span>
+        <span>Home</span>
+    </a>
+    <a href="library.html" class="nav-item">
+        <span class="nav-icon">🏛️</span>
+        <span>Library</span>
+    </a>
+    <a href="community.html" class="nav-item">
+        <span class="nav-icon">👥</span>
+        <span>Community</span>
+    </a>
+    <a href="my-library.html" class="nav-item">
+        <span class="nav-icon">📚</span>
+        <span>My Books</span>
+    </a>
+    <a href="categories.html" class="nav-item">
+        <span class="nav-icon">📂</span>
+        <span>Categories</span>
+    </a>
+</nav>
+
+<!-- Install App Button (shown conditionally) -->
+<button id="installButton" style="display: none; position: fixed; bottom: 80px; right: 20px; background: #3498db; color: white; border: none; border-radius: 50%; width: 60px; height: 60px; font-size: 1.5em; box-shadow: 0 4px 12px rgba(0,0,0,0.3); z-index: 999;">
+    📱
+</button>
+</body>
+</html>
